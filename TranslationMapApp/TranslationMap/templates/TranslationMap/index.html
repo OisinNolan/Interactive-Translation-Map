@@ -1,0 +1,84 @@
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'TranslationMap/style.css' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script type='text/javascript' src='https://www.gstatic.com/charts/loader.js'></script>
+    <script type='text/javascript'>
+     google.charts.load('current', {
+       'packages': ['geochart'],
+       // Note: you will need to get a mapsApiKey for your project.
+       // See: https://developers.google.com/chart/interactive/docs/basic_load_libs#load-settings
+       'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY'
+     });
+     google.charts.setOnLoadCallback(drawMarkersMap);
+
+      function drawMarkersMap() {
+      var data = google.visualization.arrayToDataTable([
+        ['Country',   'Translation'],
+        ['France',  '{{ France }}'],
+        ['Germany', '{{ Germany}}'],
+        ['Spain',  '{{ Spain }}'],
+        ['Iceland', '{{ Iceland }}'],
+        ['Ireland', '{{ Ireland }}'],
+        ['England', '{{ England }}'],
+        ['Scotland', '{{ Scotland }}'],
+        ['Wales', '{{ Wales }}'],
+        ['Netherlands', '{{ Netherlands }}'],
+        ['Portugal', '{{ Portugal }}'],
+        ['Denmark', '{{ Denmark }}'],
+        ['Norway', '{{ Norway }}'],
+        ['Sweden', '{{ Sweden }}'],
+        ['Finland', '{{ Finland }}'],
+        ['Estonia', '{{ Estonia }}'],
+        ['Latvia', '{{ Latvia }}'],
+        ['Lithuania', '{{ Lithuania }}'],
+        ['Luxembourg', '{{ Luxembourg }}'],
+        ['Russia', '{{ Russia }}'],
+        ['Belarus', '{{ Belarus }}'],
+        ['Ukraine', '{{ Ukraine }}'],
+        ['Czechia', '{{ Czechia }}'],
+        ['Poland', '{{ Poland }}'],
+        ['Slovakia', '{{ Slovakia }}'],
+        ['Slovenia', '{{ Slovenia }}'],
+        ['Romania', '{{ Romania }}'],
+        ['Bulgaria', '{{ Bulgaria }}'],
+        ['Serbia', '{{ Serbia }}'],
+        ['Hungary', '{{ Hungary }}'],
+        ['Croatia', '{{ Croatia }}'],
+        ['Greece', '{{ Greece }}'],
+        ['Georgia', '{{ Georgia }}'],
+        ['Italy', '{{ Italy }}'],
+        ['Turkey', '{{ Turkey }}'],
+      ]);
+
+      var options = {
+        region: '150', // Europe
+        displayMode: 'text',
+      };
+
+      var chart = new google.visualization.GeoChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    };
+    </script>
+
+
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-primary">
+        <span class="navbar-brand mb-0 h1">Euro Translation Map</span>
+        <div class="form_container">
+        <form method="post">
+            {% csrf_token %}
+            <span class="input_box">{{ form }}</span>
+            <button type="submit" id="submit_button" class="btn btn-light btn-sm">Submit</button>
+            </form>
+        </div>
+    </nav>
+    <div id="chart_div"></div>
+  </body>
+</html>
